@@ -45,7 +45,7 @@ public class ConnectionStringWithDesiredCapabilities {
         System.out.print("This is a 1st Sample Test");
     }
 
-   // @AfterTest
+   @AfterTest
     public void teaDown() {
         if (null != driver) {
             driver.quit();

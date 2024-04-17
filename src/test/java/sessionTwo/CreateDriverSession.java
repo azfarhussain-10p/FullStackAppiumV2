@@ -18,6 +18,8 @@ public class CreateDriverSession {
             case "Android":
                 capabilities.setCapability("deviceName", "emulator-5554");
                 capabilities.setCapability("automationName", "UiAutomator2");
+                //capabilities.setCapability("appPackage", "com.google.android.apps.maps");
+                //capabilities.setCapability("appActivity", "com.google.android.maps.MapsActivity");
                 capabilities.setCapability("app", System.getProperty("user.dir") + "/app/ApiDemos-debug.apk");
                 capabilities.setCapability("noReset", false);
                 return new AndroidDriver(url, capabilities);
