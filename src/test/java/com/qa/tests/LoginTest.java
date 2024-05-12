@@ -2,11 +2,9 @@ package com.qa.tests;
 
 import com.qa.base.AppFactory;
 import com.qa.pages.ProductPage;
-import netscape.javascript.JSObject;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -49,8 +47,8 @@ public class LoginTest extends AppFactory {
     @Test
     public void verifyInvalidUserName() {
         System.out.println("This test is used to verify that User will get the Error message while entering Invalid User Name");
-        loginPage.enterValidUserName(loginUsers.getJSONObject("invalidUser").getString("userName"));
-        loginPage.enterValidPassword(loginUsers.getJSONObject("invalidUser").getString("password"));
+        loginPage.enterUserName(loginUsers.getJSONObject("invalidUser").getString("userName"));
+        loginPage.enterPassword(loginUsers.getJSONObject("invalidUser").getString("password"));
         loginPage.clickLoginButton();
 
         String actualErrorMessage = loginPage.getErrorMessage();
@@ -62,8 +60,8 @@ public class LoginTest extends AppFactory {
     @Test
     public void verifyInvalidPassword() {
         System.out.println("This test is used to verify that User will get the Error message while entering Invalid Password");
-        loginPage.enterValidUserName(loginUsers.getJSONObject("invalidPassword").getString("userName"));
-        loginPage.enterValidPassword(loginUsers.getJSONObject("invalidPassword").getString("password"));
+        loginPage.enterUserName(loginUsers.getJSONObject("invalidPassword").getString("userName"));
+        loginPage.enterPassword(loginUsers.getJSONObject("invalidPassword").getString("password"));
         loginPage.clickLoginButton();
 
         String actualErrorMessage = loginPage.getErrorMessage();
@@ -75,8 +73,8 @@ public class LoginTest extends AppFactory {
     @Test
     public void verifyUserCreation() {
         System.out.println("This test is used to validate the successful login functionality with Valid User Name and Password ");
-        loginPage.enterValidUserName(loginUsers.getJSONObject("validUserAndPassword").getString("userName"));
-        loginPage.enterValidPassword(loginUsers.getJSONObject("validUserAndPassword").getString("password"));
+        loginPage.enterUserName(loginUsers.getJSONObject("validUserAndPassword").getString("userName"));
+        loginPage.enterPassword(loginUsers.getJSONObject("validUserAndPassword").getString("password"));
         productPage = loginPage.clickLoginButton();
 
         String actualProductTitle = productPage.getTitle();

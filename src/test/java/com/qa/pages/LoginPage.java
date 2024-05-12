@@ -25,11 +25,11 @@ public class LoginPage extends AppFactory {
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"LOGIN\"]")
     public WebElement loginButton;
 
-    public void enterValidUserName(String userName) {
+    public void enterUserName(String userName) {
         sendKeys(userNameTextbox, userName);
     }
 
-    public void enterValidPassword(String password) {
+    public void enterPassword(String password) {
         sendKeys(passwordTextbox, password);
     }
 
