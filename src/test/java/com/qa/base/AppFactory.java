@@ -12,20 +12,30 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class AppFactory {
 
     protected static AppiumDriver driver;
     protected static ConfigReader configReader;
+    protected static HashMap<String, String> stringHashMap = new HashMap<String, String>();
+    InputStream stringsIs;
+    Utilities utilities;
 
     @BeforeTest
     @Parameters({"platformName", "platformVersion", "deviceName"})
-    public void initializer(String platformName, String platformVersion, String deviceName) throws IOException {
+    public void initializer(String platformName, String platformVersion, String deviceName) throws Exception {
         try {
             configReader = new ConfigReader();
+            String xmlFileName = "strings/strings.xml";
+
+            stringsIs = getClass().getClassLoader().getResourceAsStream(xmlFileName);
+            utilities = new Utilities();
+            stringHashMap = utilities.parseStringXML(stringsIs);
+
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("platformName", platformName);
             capabilities.setCapability("platformVersion", platformVersion);
@@ -42,6 +52,10 @@ public class AppFactory {
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
+        } finally {
+            if (stringsIs != null) {
+                stringsIs.close();
+            }
         }
     }
 
