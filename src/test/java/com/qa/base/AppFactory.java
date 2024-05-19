@@ -6,7 +6,6 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.AndroidDriver;
-import jdk.jfr.Description;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +24,7 @@ public class AppFactory {
     protected static AppiumDriver driver;
     protected static ConfigReader configReader;
     protected static HashMap<String, String> stringHashMap = new HashMap<String, String>();
+    protected static String dateTime;
     InputStream stringsIs;
     Utilities utilities;
 
@@ -32,11 +32,12 @@ public class AppFactory {
     @Parameters({"platformName", "platformVersion", "deviceName"})
     public void initializer(String platformName, String platformVersion, String deviceName) throws Exception {
         try {
+            utilities = new Utilities();
+            dateTime = utilities.getDateTime();
             configReader = new ConfigReader();
             String xmlFileName = "strings/strings.xml";
 
             stringsIs = getClass().getClassLoader().getResourceAsStream(xmlFileName);
-            utilities = new Utilities();
             stringHashMap = utilities.parseStringXML(stringsIs);
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -111,6 +112,9 @@ public class AppFactory {
         AppDriver.getDriver().findElement(AppiumBy.androidUIAutomator(uiAutomatorString));
     }
 
+    public static String getDateAndTime() {
+        return dateTime;
+    }
 
     @AfterTest
     public static void quitDriver() {

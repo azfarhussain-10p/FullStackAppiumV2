@@ -1,6 +1,5 @@
 package com.qa.tests;
 
-import com.google.j2objc.annotations.Property;
 import com.qa.base.AppFactory;
 import com.qa.pages.LoginPage;
 import com.qa.pages.ProductDetailsPage;
@@ -8,7 +7,6 @@ import com.qa.pages.ProductsPage;
 import com.qa.pages.SettingsPage;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

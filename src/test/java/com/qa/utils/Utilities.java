@@ -6,6 +6,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
@@ -43,5 +47,11 @@ public class Utilities {
             }
         }
         return stringMap;
+    }
+
+    public String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }
