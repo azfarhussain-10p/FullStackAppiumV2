@@ -2,7 +2,7 @@ package com.qa.tests;
 
 import com.qa.base.AppFactory;
 import com.qa.pages.LoginPage;
-import com.qa.pages.ProductPage;
+import com.qa.pages.ProductsPage;
 import jdk.jfr.Description;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class LoginTestV2 extends AppFactory {
     LoginPage loginPage;
-    ProductPage productPage;
+    ProductsPage productPage;
     InputStream inputStream;
     JSONObject loginUser;
 
@@ -37,6 +37,8 @@ public class LoginTestV2 extends AppFactory {
                 inputStream.close();
             }
         }
+        closeApp();
+        launchApp();
     }
 
     @BeforeMethod

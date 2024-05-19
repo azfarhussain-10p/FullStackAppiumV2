@@ -5,6 +5,7 @@ import com.qa.base.AppFactory;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.bidi.log.Log;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends AppFactory {
@@ -14,31 +15,44 @@ public class LoginPage extends AppFactory {
     }
 
     @AndroidFindBy(accessibility = "test-Username")
-    public WebElement userNameTextbox;
+    private WebElement userNameTextbox;
 
     @AndroidFindBy(accessibility = "test-Password")
-    public WebElement passwordTextbox;
+    private WebElement passwordTextbox;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Username and password do not match any user in this service.\"]")
-    public WebElement errorMessage;
+    private WebElement errorTextMessage;
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"LOGIN\"]")
-    public WebElement loginButton;
+    private WebElement loginButton;
 
-    public void enterUserName(String userName) {
+    public LoginPage enterUserName(String userName) {
+        System.out.println("Login with: " + userName);
         sendKeys(userNameTextbox, userName);
+        return this;
     }
 
-    public void enterPassword(String password) {
+    public LoginPage enterPassword(String password) {
+        System.out.println("Password is: " + password);
         sendKeys(passwordTextbox, password);
+        return this;
     }
 
-    public ProductPage clickLoginButton() {
+    public ProductsPage clickLoginButton() {
+        System.out.println("Clicking on Login Button");
         clickElement(loginButton);
-        return new ProductPage();
+        return new ProductsPage();
+    }
+
+    public ProductsPage login(String userName, String password) {
+        enterUserName(userName);
+        enterPassword(password);
+        return clickLoginButton();
     }
 
     public String getErrorMessage() {
-        return getAttribute(errorMessage, "text");
+        String errorMessage = getText(errorTextMessage);
+        System.out.println("Error Text is: " + errorMessage);
+        return errorMessage;
     }
 }

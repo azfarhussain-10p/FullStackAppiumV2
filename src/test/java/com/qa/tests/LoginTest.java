@@ -1,7 +1,8 @@
 package com.qa.tests;
 
 import com.qa.base.AppFactory;
-import com.qa.pages.ProductPage;
+import com.qa.pages.ProductsPage;
+import com.qa.pages.SettingsPage;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.testng.Assert;
@@ -18,7 +19,7 @@ import java.util.Objects;
 public class LoginTest extends AppFactory {
 
     LoginPage loginPage;
-    ProductPage productPage;
+    ProductsPage productPage;
     InputStream inputStream;
     JSONObject loginUsers;
 
@@ -29,13 +30,15 @@ public class LoginTest extends AppFactory {
             inputStream = getClass().getClassLoader().getResourceAsStream(dataFileName);
             JSONTokener jsonTokener = new JSONTokener(Objects.requireNonNull(inputStream));
             loginUsers = new JSONObject(jsonTokener);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
-        }finally {
-            if(inputStream != null){
+        } finally {
+            if (inputStream != null) {
                 inputStream.close();
             }
         }
+        closeApp();
+        launchApp();
     }
 
     @BeforeMethod

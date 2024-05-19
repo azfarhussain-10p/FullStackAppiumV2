@@ -7,16 +7,17 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProductPage extends AppFactory {
-
-    public ProductPage() {
+public class SettingsPage extends AppFactory {
+    public SettingsPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppDriver.getDriver()), this);
     }
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"PRODUCTS\"]")
-    public WebElement productHeader;
+    @AndroidFindBy(accessibility = "test-LOGOUT")
+    public WebElement logoutButton;
 
-    public String getTitle() {
-        return getAttribute(productHeader, "text");
+    public LoginPage clickLogoutButton() {
+        System.out.println("Clicking on Logout Button");
+        clickElement(logoutButton);
+        return new LoginPage();
     }
 }

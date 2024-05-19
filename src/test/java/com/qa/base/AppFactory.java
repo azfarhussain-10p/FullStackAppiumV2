@@ -2,8 +2,11 @@ package com.qa.base;
 
 import com.qa.utils.Utilities;
 import com.qa.utils.ConfigReader;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.AndroidDriver;
+import jdk.jfr.Description;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -64,6 +67,11 @@ public class AppFactory {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForElementToBeClickable(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Utilities.WAITFORCLICK));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
     public void clickElement(WebElement element) {
         waitForVisibility(element);
         element.click();
@@ -78,6 +86,31 @@ public class AppFactory {
         waitForVisibility(element);
         return element.getAttribute(attribute);
     }
+
+    public String getText(WebElement element) {
+        String elementText = null;
+        elementText = getAttribute(element, "text");
+        return elementText;
+    }
+
+    public void closeApp() {
+        ((InteractsWithApps) AppDriver.getDriver()).terminateApp(configReader.getAppPackage());
+    }
+
+    public void launchApp() {
+        ((InteractsWithApps) AppDriver.getDriver()).activateApp(configReader.getAppPackage());
+    }
+
+    public void scrollToElement(String parentDescription, String targetDescription) {
+        String uiAutomatorString = String.format(
+                "new UiScrollable(new UiSelector().description(\"%s\")).scrollIntoView("
+                        + "new UiSelector().description(\"%s\"));",
+                parentDescription, targetDescription
+        );
+
+        AppDriver.getDriver().findElement(AppiumBy.androidUIAutomator(uiAutomatorString));
+    }
+
 
     @AfterTest
     public static void quitDriver() {
