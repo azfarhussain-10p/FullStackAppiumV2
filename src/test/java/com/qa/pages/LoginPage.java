@@ -5,7 +5,6 @@ import com.qa.base.AppFactory;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.bidi.log.Log;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends AppFactory {
