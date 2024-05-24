@@ -48,7 +48,7 @@ public class ProductTest extends AppFactory {
     @BeforeMethod
     public void setup(Method method) {
         loginPage = new LoginPage();
-        System.out.println("\n" + "********** Starting Test: " + method.getName() + " **********" + "\n");
+        utilities.log().info("\n********** Starting Test: {} **********\n", method.getName());
 
         productsPage = loginPage.login(loginUsers.getJSONObject("validUserAndPassword").getString("userName"),
                 loginUsers.getJSONObject("validUserAndPassword").getString("password"));

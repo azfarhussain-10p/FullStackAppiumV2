@@ -26,24 +26,24 @@ public class ProductDetailsPage extends MenuPage {
 
     public String getSLBackpackTitle() {
         String SLBTitle = getText(SLBackpackTitle);
-        System.out.println("Title is: " + SLBTitle);
+        utilities.log().info("Title is: {}", SLBTitle);
         return SLBTitle;
     }
 
     public String getSLBackpackDescription() {
         String SLBDescription = getText(SLBackpackDescription);
-        System.out.println("Product Description is: " + SLBDescription);
+        utilities.log().info("Product Description is: {}", SLBDescription);
         return SLBDescription;
     }
 
     public String getSLBPrice() {
         String SLBPrice = getText(SLBProductPrice);
-        System.out.println("Product Price is: " + SLBPrice);
+        utilities.log().info("Product Price is: {}", SLBPrice);
         return SLBPrice;
     }
 
     public ProductsPage clickBackToProduct() {
-        System.out.println("Navigate to Product Page");
+        utilities.log().info("Navigate to Product Page");
         clickElement(backToProductButton);
         return new ProductsPage();
     }

@@ -6,8 +6,6 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.AndroidDriver;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,20 +26,12 @@ public class AppFactory {
     protected static HashMap<String, String> stringHashMap = new HashMap<String, String>();
     protected static String dateTime;
     InputStream stringsIs;
-    Utilities utilities;
-    static Logger log = LogManager.getLogger(AppFactory.class.getName());
+    public Utilities utilities = new Utilities();
 
     @BeforeTest
     @Parameters({"platformName", "platformVersion", "deviceName"})
     public void initializer(String platformName, String platformVersion, String deviceName) throws Exception {
         try {
-            log.debug("This is Debug message");
-            log.info("This is Info message");
-            log.warn("This is Warning message");
-            log.error("This is Error message");
-            log.fatal("This is Fatal Error");
-
-            utilities = new Utilities();
             dateTime = utilities.getDateTime();
             configReader = new ConfigReader();
             String xmlFileName = "strings/strings.xml";
@@ -61,6 +51,7 @@ public class AppFactory {
             capabilities.setCapability("app", System.getProperty("user.dir") + configReader.getApkPath());
             driver = new AndroidDriver(new URL(configReader.appiumServerEndpointURL()), capabilities);
             AppDriver.setDriver(driver);
+            utilities.log().info("appURL is {}", configReader.appiumServerEndpointURL());
             System.out.println("Android driver is set");
         } catch (Exception exception) {
             exception.printStackTrace();

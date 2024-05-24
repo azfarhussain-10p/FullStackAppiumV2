@@ -44,7 +44,7 @@ public class LoginTestV2 extends AppFactory {
     @BeforeMethod
     public void setup(Method method) {
         loginPage = new LoginPage();
-        System.out.println("\n" + "********** Starting Test: " + method.getName() + " **********" + "\n");
+        utilities.log().info("\n********** Starting Test: {} **********\n", method.getName());
     }
 
     @Test(dataProvider = "userCredentials")
@@ -66,13 +66,13 @@ public class LoginTestV2 extends AppFactory {
             // Perform validation for invalid userName and valid password and valid userName and invalid password
             String actualErrorMessage = loginPage.getErrorMessage();
             String expectedErrorMessage = stringHashMap.get("error_invalid_userName_and_password");
-            System.out.println("Actual Error Message is - " + actualErrorMessage + "\n" + "Expected Error Message is - " + expectedErrorMessage);
+            utilities.log().info("Actual Error Message is - {}\nExpected Error Message is - {}", actualErrorMessage, expectedErrorMessage);
             Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
         } else {
             // Perform validation for valid userName and valid password
             String actualProductTitle = productPage.getTitle();
             String expectedProductTitle = stringHashMap.get("product_title");
-            System.out.println("Actual Product page title is - " + actualProductTitle + "\n" + "Expected Product page title is - " + expectedProductTitle);
+            utilities.log().info("Actual Product page title is - {}\nExpected Product page title is - {}", actualProductTitle, expectedProductTitle);
             Assert.assertEquals(actualProductTitle, expectedProductTitle);
         }
     }

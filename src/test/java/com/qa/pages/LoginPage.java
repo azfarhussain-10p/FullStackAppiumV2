@@ -26,19 +26,19 @@ public class LoginPage extends AppFactory {
     private WebElement loginButton;
 
     public LoginPage enterUserName(String userName) {
-        System.out.println("Login with: " + userName);
+        utilities.log().info("Login with: {}", userName);
         sendKeys(userNameTextbox, userName);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
-        System.out.println("Password is: " + password);
+        utilities.log().info("Password is: {}", password);
         sendKeys(passwordTextbox, password);
         return this;
     }
 
     public ProductsPage clickLoginButton() {
-        System.out.println("Clicking on Login Button");
+        utilities.log().info("Clicking on Login Button");
         clickElement(loginButton);
         return new ProductsPage();
     }
@@ -51,7 +51,7 @@ public class LoginPage extends AppFactory {
 
     public String getErrorMessage() {
         String errorMessage = getText(errorTextMessage);
-        System.out.println("Error Text is: " + errorMessage);
+        utilities.log().info("Error Text is: {}", errorMessage);
         return errorMessage;
     }
 }

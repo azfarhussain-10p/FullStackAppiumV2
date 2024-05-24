@@ -16,7 +16,7 @@ public class MenuPage extends AppFactory {
     private WebElement settingsButton;
 
     public SettingsPage clickSettingsButton() {
-        System.out.println("Clicking on Settings Button");
+        utilities.log().info("Clicking on Settings Button");
         waitForElementToBeClickable(settingsButton);
         clickElement(settingsButton);
         return new SettingsPage();
