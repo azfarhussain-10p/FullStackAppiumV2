@@ -2,7 +2,6 @@ package com.qa.tests;
 
 import com.qa.base.AppFactory;
 import com.qa.pages.ProductsPage;
-import com.qa.pages.SettingsPage;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.testng.Assert;

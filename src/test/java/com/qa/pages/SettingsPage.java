@@ -16,8 +16,7 @@ public class SettingsPage extends AppFactory {
     public WebElement logoutButton;
 
     public LoginPage clickLogoutButton() {
-        utilities.log().info("Clicking on Logout Button");
-        clickElement(logoutButton);
+        clickElement(logoutButton, "Clicking on Logout Button");
         return new LoginPage();
     }
 }

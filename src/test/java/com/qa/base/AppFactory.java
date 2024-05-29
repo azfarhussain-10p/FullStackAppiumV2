@@ -1,18 +1,19 @@
 package com.qa.base;
 
+import com.aventstack.extentreports.Status;
+import com.qa.reports.ExtentReport;
 import com.qa.utils.Utilities;
 import com.qa.utils.ConfigReader;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -25,8 +26,31 @@ public class AppFactory {
     protected static ConfigReader configReader;
     protected static HashMap<String, String> stringHashMap = new HashMap<String, String>();
     protected static String dateTime;
+    private static AppiumDriverLocalService server;
     InputStream stringsIs;
     public Utilities utilities = new Utilities();
+
+    @BeforeSuite
+    public void upAndRunningAppiumServer() {
+        server = getAppiumServerDefault();
+        if (!utilities.checkIfAppiumServerIsRunning(4723)) {
+            server.start();
+            server.clearOutPutStreams(); // This command is used to stop print Appium server's logs into console.
+            utilities.log().info("Starting Appium server...");
+        } else {
+            utilities.log().info("Appium Server is already up and running...");
+        }
+    }
+
+    @AfterSuite
+    public void shutDownServer() {
+        server.stop();
+        utilities.log().info("Shutting down Appium server...");
+    }
+
+    public AppiumDriverLocalService getAppiumServerDefault() {
+        return AppiumDriverLocalService.buildDefaultService();
+    }
 
     @BeforeTest
     @Parameters({"platformName", "platformVersion", "deviceName"})
@@ -35,6 +59,8 @@ public class AppFactory {
             dateTime = utilities.getDateTime();
             configReader = new ConfigReader();
             String xmlFileName = "strings/strings.xml";
+            AppDriver.setPlatform(platformName);
+            AppDriver.setDeviceName(deviceName);
 
             stringsIs = getClass().getClassLoader().getResourceAsStream(xmlFileName);
             stringHashMap = utilities.parseStringXML(stringsIs);
@@ -52,7 +78,7 @@ public class AppFactory {
             driver = new AndroidDriver(new URL(configReader.appiumServerEndpointURL()), capabilities);
             AppDriver.setDriver(driver);
             utilities.log().info("appURL is {}", configReader.appiumServerEndpointURL());
-            System.out.println("Android driver is set");
+            utilities.log().info("Android driver is set");
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
@@ -73,13 +99,17 @@ public class AppFactory {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void clickElement(WebElement element) {
+    public void clickElement(WebElement element, String message) {
         waitForVisibility(element);
+        utilities.log().info(message);
+        ExtentReport.getTest().log(Status.INFO, message);
         element.click();
     }
 
-    public void sendKeys(WebElement element, String text) {
+    public void sendKeys(WebElement element, String text, String message) {
         waitForVisibility(element);
+        utilities.log().info(message);
+        ExtentReport.getTest().log(Status.INFO, message);
         element.sendKeys(text);
     }
 
@@ -88,9 +118,11 @@ public class AppFactory {
         return element.getAttribute(attribute);
     }
 
-    public String getText(WebElement element) {
+    public String getText(WebElement element, String message) {
         String elementText = null;
         elementText = getAttribute(element, "text");
+        utilities.log().info("{}{}", message, elementText);
+        ExtentReport.getTest().log(Status.INFO, message + elementText);
         return elementText;
     }
 

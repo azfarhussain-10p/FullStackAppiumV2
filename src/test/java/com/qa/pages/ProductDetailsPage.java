@@ -25,26 +25,19 @@ public class ProductDetailsPage extends MenuPage {
     private WebElement SLBProductPrice;
 
     public String getSLBackpackTitle() {
-        String SLBTitle = getText(SLBackpackTitle);
-        utilities.log().info("Title is: {}", SLBTitle);
-        return SLBTitle;
+        return getText(SLBackpackTitle, "Title is: ");
     }
 
     public String getSLBackpackDescription() {
-        String SLBDescription = getText(SLBackpackDescription);
-        utilities.log().info("Product Description is: {}", SLBDescription);
-        return SLBDescription;
+        return getText(SLBackpackDescription, "Product Description is: ");
     }
 
     public String getSLBPrice() {
-        String SLBPrice = getText(SLBProductPrice);
-        utilities.log().info("Product Price is: {}", SLBPrice);
-        return SLBPrice;
+        return getText(SLBProductPrice, "Product Price is: ");
     }
 
     public ProductsPage clickBackToProduct() {
-        utilities.log().info("Navigate to Product Page");
-        clickElement(backToProductButton);
+        clickElement(backToProductButton, "Navigate to Product Page");
         return new ProductsPage();
     }
 }

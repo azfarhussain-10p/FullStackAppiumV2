@@ -26,20 +26,17 @@ public class LoginPage extends AppFactory {
     private WebElement loginButton;
 
     public LoginPage enterUserName(String userName) {
-        utilities.log().info("Login with: {}", userName);
-        sendKeys(userNameTextbox, userName);
+        sendKeys(userNameTextbox, userName, "Login with: " + userName);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
-        utilities.log().info("Password is: {}", password);
-        sendKeys(passwordTextbox, password);
+        sendKeys(passwordTextbox, password, "Password is: " + password);
         return this;
     }
 
     public ProductsPage clickLoginButton() {
-        utilities.log().info("Clicking on Login Button");
-        clickElement(loginButton);
+        clickElement(loginButton, "Clicking on Login Button");
         return new ProductsPage();
     }
 
@@ -50,8 +47,6 @@ public class LoginPage extends AppFactory {
     }
 
     public String getErrorMessage() {
-        String errorMessage = getText(errorTextMessage);
-        utilities.log().info("Error Text is: {}", errorMessage);
-        return errorMessage;
+        return getText(errorTextMessage, "Error Text is: ");
     }
 }

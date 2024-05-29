@@ -8,6 +8,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,7 +21,7 @@ import java.util.HashMap;
 
 public class Utilities {
     public static final long WAIT = 10;
-    public static final long WAITFORCLICK = 30;
+    public static final long WAITFORCLICK = 20;
 
     @Description("This method is used to ready String from the string.xml file")
     public HashMap<String, String> parseStringXML(InputStream file) throws Exception {
@@ -34,11 +36,11 @@ public class Utilities {
         // Normalize the XML Structure
         document.getDocumentElement().normalize();
         Element root = document.getDocumentElement();
-        System.out.println(root.getNodeName());
+        log().info(root.getNodeName());
 
         // Get all Elements
         NodeList nodeList = document.getElementsByTagName("string");
-        System.out.println("=========");
+        log().info("=========");
 
         for (int temp = 0; temp < nodeList.getLength(); temp++) {
             Node node = nodeList.item(temp);
@@ -59,5 +61,20 @@ public class Utilities {
 
     public Logger log() {
         return LogManager.getLogger(Thread.currentThread().getStackTrace()[2].getClassName());
+    }
+
+    public boolean checkIfAppiumServerIsRunning(int port) {
+        boolean isAppiumServerRunning = false;
+        ServerSocket socket;
+        try {
+            socket = new ServerSocket(port);
+            socket.close();
+        } catch (IOException exception) {
+            log().info("True");
+            isAppiumServerRunning = true;
+        } finally {
+            socket = null;
+        }
+        return isAppiumServerRunning;
     }
 }
