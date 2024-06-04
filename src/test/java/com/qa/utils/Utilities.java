@@ -20,8 +20,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 public class Utilities {
-    public static final long WAIT = 10;
-    public static final long WAITFORCLICK = 20;
+    public static final long WAIT = 20;
+    public static final long WAITFORCLICK = 30;
 
     @Description("This method is used to ready String from the string.xml file")
     public HashMap<String, String> parseStringXML(InputStream file) throws Exception {
