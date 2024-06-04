@@ -7,6 +7,7 @@ import com.qa.pages.ProductsPage;
 import com.qa.pages.SettingsPage;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -84,6 +85,11 @@ public class ProductTest extends AppFactory {
         softAssert.assertEquals(SLBPrice, stringHashMap.get("product_details_page_slb_price"));
 
         productsPage = productDetailsPage.clickBackToProduct();
+
+        String actualProductTitle = productsPage.getTitle();
+        String expectedProductTitle = stringHashMap.get("product_title");
+        utilities.log().info("Actual Product page title is - {}\nExpected Product page title is - {}", actualProductTitle, expectedProductTitle);
+        Assert.assertEquals(actualProductTitle, expectedProductTitle);
         softAssert.assertAll();
     }
 
