@@ -1,52 +1,14 @@
-[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine/)
+## Say Hi! to Appium Version 2...
 
-<p align="center">
-   <a href="https://appium.io/">
-      <img alt="Appium" src="https://raw.githubusercontent.com/appium/appium/master/packages/appium/docs/assets/images/appium-logo-horiz.png" width="500">
-   </a>
-</p>
-<p align="center">
-   Cross-platform test automation for native, hybrid, mobile web and desktop apps.
-</p>
+The most notable distinction lies in Appium 2.0 positioning itself as a platform that facilitates the effortless creation and sharing of "drivers" (code projects designed for automating specific platforms) and "plugins" (code projects intended for modifying, extending, or adding functionalities to Appium).
+Some other significant features include:
+Autonomous Drivers In Appium 2.0, drivers can now be autonomously installed, uninstalled, or updated. This means that, for instance, instead of awaiting a new Appium server release, users have the flexibility to exclusively update the XCUITest driver using command-line interface (CLI) commands.
 
-[![NPM version](https://badge.fury.io/js/appium.svg)](https://npmjs.org/package/appium)
-[![Monthly Downloads](https://img.shields.io/npm/dm/appium.svg)](https://npmjs.org/package/appium)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fappium%2Fappium.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fappium%2Fappium?ref=badge_shield)
-[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/)
-
-***
-
-<p align="center"><b>
-   <a href="https://appium.io">Documentation</a> |
-   <a href="https://appium.io/docs/en/latest/intro/">Get Started</a> |
-   <a href="https://appium.io/docs/en/latest/ecosystem/">Ecosystem</a> |
-   <a href="https://github.com/appium/appium/blob/master/packages/appium/CHANGELOG.md">Changelog</a> |
-   <a href="https://github.com/appium/appium/blob/master/ROADMAP.md">Roadmap</a> |
-   <a href="https://discuss.appium.io">Discussion Forum</a>
-</b></p>
-
-***
-
-Appium is an open-source automation framework that provides
-[WebDriver](https://www.w3.org/TR/webdriver/)-based automation possibilities for a wide range of
-different mobile, desktop and IoT platforms. Appium is modular and extensible, and supports multiple
-programming languages, which means there is an entire ecosystem of related software:
-* [__Drivers__](#drivers) add support for automating specific platforms
-* [__Clients__](#clients) allow writing Appium tests in your programming language of choice
-* [__Plugins__](#plugins) allow to further extend Appium functionality
-
-## Migrating From Appium 1 to Appium 2
-
-As of January 1st, 2022, the Appium team no longer maintains or supports Appium 1. All officially
-supported platform drivers are only compatible with Appium 2.
-
-__[Please read the Migration Guide](https://appium.io/docs/en/latest/guides/migrating-1-to-2/) if you
-are still using Appium 1.__
-
-> [!WARNING]
-> If you use Appium Desktop or Appium Server GUI, you will not be able to upgrade to Appium 2, as
-both of these tools have been deprecated. Please use [Appium Inspector](https://github.com/appium/appium-inspector)
-in combination with a standalone Appium 2 server.
+## Install and update Single and Multiple Driver
+1. appium driver list
+2. appium driver install xcuitest
+3. appium driver update xcuitest
+4. appium driver update xcuitest, uiautomator2
 
 ## Installation
 
@@ -178,8 +140,6 @@ cross-platform native app automation, for mobile and beyond!
 If you are looking for a more comprehensive description of what this is all about, please read our
 documentation on [How Does Appium Work?](https://appium.io/docs/en/latest/intro/appium/).
 
-## License
+## Supporting URL
 
-[Apache-2.0](./LICENSE)
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fappium%2Fappium.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fappium%2Fappium?ref=badge_large)
+* [Appium V2 Prerequisites](https://10pearls-fullstack-appiumv2.my.canva.site/prerequisites)
